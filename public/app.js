@@ -24,6 +24,58 @@ let selectedFile = null;
 let ingredients = []; // { name, source: 'recognized' | 'manual' }
 let requestInFlight = false; // 클라이언트 측 디바운스: 동시 요청 방지
 
+// Vercel 서버리스 함수는 요청 본문 크기를 4.5MB로 강제 제한한다(플랫폼 고정값, 서버 코드로
+// 바꿀 수 없음). 모바일 카메라 사진은 흔히 4~8MB라 원본 그대로 올리면 서버에 도달하기도 전에
+// 요청이 거부되고, app.js는 이를 구분되지 않는 네트워크 에러("서버와 통신할 수 없습니다")로
+// 표시하게 된다. 그래서 업로드 직전에 캔버스로 리사이즈/재인코딩해 여유 있게 줄여서 보낸다.
+const UPLOAD_MAX_DIMENSION = 1600;
+const UPLOAD_TARGET_BYTES = 3.5 * 1024 * 1024;
+
+function loadImage(file) {
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      resolve(img);
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error("IMAGE_DECODE_FAILED"));
+    };
+    img.src = url;
+  });
+}
+
+function canvasToBlob(canvas, quality) {
+  return new Promise((resolve, reject) => {
+    canvas.toBlob(
+      (blob) => (blob ? resolve(blob) : reject(new Error("CANVAS_ENCODE_FAILED"))),
+      "image/jpeg",
+      quality
+    );
+  });
+}
+
+// 인식 정확도에 큰 영향 없는 선에서 화질을 단계적으로 낮춰가며 목표 용량 이하가 될 때까지 재인코딩한다.
+async function compressForUpload(file) {
+  const img = await loadImage(file);
+  const scale = Math.min(1, UPLOAD_MAX_DIMENSION / Math.max(img.width, img.height));
+  const canvas = document.createElement("canvas");
+  canvas.width = Math.round(img.width * scale);
+  canvas.height = Math.round(img.height * scale);
+  const ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+  let quality = 0.85;
+  let blob = await canvasToBlob(canvas, quality);
+  while (blob.size > UPLOAD_TARGET_BYTES && quality > 0.4) {
+    quality -= 0.15;
+    blob = await canvasToBlob(canvas, quality);
+  }
+  return blob;
+}
+
 function resetResult() {
   ingredients = [];
   resultSection.hidden = true;
@@ -135,10 +187,18 @@ async function recognize() {
   statusEl.textContent = "이미지를 분석하는 중입니다...";
   resultSection.hidden = true;
 
-  const formData = new FormData();
-  formData.append("image", selectedFile);
-
   try {
+    let uploadBlob;
+    try {
+      uploadBlob = await compressForUpload(selectedFile);
+    } catch (compressErr) {
+      // 압축 자체가 실패하면(예: 브라우저 호환성 문제) 원본으로 폴백 — 원본이 작으면 어차피 통과된다.
+      uploadBlob = selectedFile;
+    }
+
+    const formData = new FormData();
+    formData.append("image", uploadBlob, selectedFile.name || "image.jpg");
+
     const res = await fetch("/api/recognize-ingredients", {
       method: "POST",
       body: formData,
