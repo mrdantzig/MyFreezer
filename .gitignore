@@ -13,3 +13,6 @@ data/
 
 # Vercel CLI project link/local build cache
 .vercel/
+
+.vercel
+.env*
