@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>프로필 - Step 3</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <div id="nav"></div>
+    <h1>내 프로필</h1>
+
+    <form id="profile-form" class="auth-form">
+      <label>
+        이메일
+        <input type="email" id="email-display" disabled />
+      </label>
+      <label>
+        닉네임
+        <input type="text" id="nickname-input" required maxlength="30" />
+      </label>
+      <label>
+        식단 선호 (쉼표로 구분, 선택)
+        <input type="text" id="diet-input" placeholder="예: 채식, 저염식" />
+      </label>
+      <label>
+        알레르기 (쉼표로 구분, 선택)
+        <input type="text" id="allergy-input" placeholder="예: 땅콩, 새우" />
+      </label>
+      <button type="submit">저장</button>
+      <p id="message" class="hint"></p>
+    </form>
+  </main>
+
+  <script src="nav.js"></script>
+  <script src="profile.js"></script>
+</body>
+</html>

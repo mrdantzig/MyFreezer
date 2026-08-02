@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>냉장고 재료 인식 - Step 1</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <div id="nav"></div>
+    <h1>냉장고 사진으로 재료 인식하기</h1>
+    <p class="subtitle">사진을 올리면 AI가 보이는 식재료를 찾아드려요. (Step 1)</p>
+
+    <section id="drop-zone" class="drop-zone">
+      <input type="file" id="file-input" accept="image/jpeg,image/png" hidden />
+      <div id="drop-zone-content">
+        <p>이미지를 드래그하거나 클릭해서 선택하세요</p>
+        <p class="hint">JPEG / PNG, 최대 10MB</p>
+      </div>
+      <img id="preview" class="preview" hidden />
+    </section>
+
+    <div class="actions">
+      <button id="recognize-btn" disabled>재료 인식하기</button>
+      <span id="status" class="status" role="status"></span>
+    </div>
+
+    <section id="result-section" hidden>
+      <h2>인식된 재료</h2>
+      <ul id="ingredient-list" class="ingredient-list"></ul>
+
+      <form id="add-form" class="add-form">
+        <input type="text" id="add-input" placeholder="재료 직접 추가" />
+        <button type="submit">추가</button>
+      </form>
+
+      <button id="confirm-btn" class="confirm-btn">이 재료로 다음 단계 진행</button>
+      <p id="confirm-message" class="hint"></p>
+      <a id="go-step2-link" class="go-link" href="step2.html" hidden>레시피 추천받으러 가기 →</a>
+    </section>
+
+    <section id="error-section" hidden>
+      <p id="error-message" class="error"></p>
+      <button id="retry-btn">다시 시도</button>
+    </section>
+  </main>
+
+  <script src="nav.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

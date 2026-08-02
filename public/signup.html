@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>회원가입 - Step 3</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <div id="nav"></div>
+    <h1>회원가입</h1>
+    <p class="subtitle">레시피를 저장하려면 계정이 필요해요.</p>
+
+    <form id="signup-form" class="auth-form">
+      <label>
+        이메일
+        <input type="email" id="email-input" required autocomplete="email" />
+      </label>
+      <label>
+        비밀번호 (8자 이상)
+        <input type="password" id="password-input" required minlength="8" autocomplete="new-password" />
+      </label>
+      <label>
+        비밀번호 확인
+        <input type="password" id="password-confirm-input" required minlength="8" autocomplete="new-password" />
+      </label>
+      <label>
+        닉네임
+        <input type="text" id="nickname-input" required maxlength="30" />
+      </label>
+      <button type="submit">가입하기</button>
+      <p id="error-message" class="error"></p>
+    </form>
+
+    <p class="hint">이미 계정이 있으신가요? <a href="login.html">로그인</a></p>
+  </main>
+
+  <script src="nav.js"></script>
+  <script src="signup.js"></script>
+</body>
+</html>

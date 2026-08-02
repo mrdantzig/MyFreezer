@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>내 레시피 - Step 3</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <div id="nav"></div>
+    <h1>📕 나의 레시피</h1>
+
+    <div class="folder-bar">
+      <label for="folder-select">폴더 선택</label>
+      <select id="folder-select"></select>
+      <button type="button" id="new-folder-btn">+ 새 폴더</button>
+      <button type="button" id="delete-folder-btn" class="delete-folder-btn" hidden>폴더 삭제</button>
+    </div>
+    <p id="folder-message" class="hint"></p>
+    <form id="new-folder-form" class="new-folder-form" hidden>
+      <input type="text" id="new-folder-input" placeholder="폴더 이름" maxlength="30" />
+      <button type="submit">추가</button>
+      <button type="button" id="cancel-folder-btn">취소</button>
+    </form>
+
+    <p id="empty-message" class="hint" hidden>이 폴더에는 저장된 레시피가 없습니다. 2단계에서 레시피를 추천받고 저장해보세요.</p>
+    <div id="recipe-list"></div>
+  </main>
+
+  <script src="nav.js"></script>
+  <script src="my-recipes.js"></script>
+</body>
+</html>

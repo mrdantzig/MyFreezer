@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>대시보드 - FridgeChef</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <div id="nav"></div>
+    <h1>📊 나의 요리 대시보드</h1>
+
+    <div id="stat-tiles" class="stat-tile-row"></div>
+
+    <section class="stats-section">
+      <h2>📈 통계</h2>
+      <p class="hint">폴더별 저장된 레시피 수</p>
+      <div id="folder-chart" class="viz-root"></div>
+      <p id="chart-empty" class="hint" hidden>아직 저장된 레시피가 없습니다.</p>
+    </section>
+  </main>
+
+  <script src="nav.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "fridge-recipe-step1",
+  "version": "0.1.0",
+  "description": "PRD_step1: fridge photo ingredient recognition via OpenRouter",
+  "private": true,
+  "type": "commonjs",
+  "main": "server.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "multer": "^2.0.0"
+  }
+}

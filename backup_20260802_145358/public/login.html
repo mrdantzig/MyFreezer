@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>로그인 - Step 3</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <div id="nav"></div>
+    <h1>로그인</h1>
+
+    <form id="login-form" class="auth-form">
+      <label>
+        이메일
+        <input type="email" id="email-input" required autocomplete="email" />
+      </label>
+      <label>
+        비밀번호
+        <input type="password" id="password-input" required autocomplete="current-password" />
+      </label>
+      <button type="submit">로그인</button>
+      <p id="error-message" class="error"></p>
+    </form>
+
+    <p class="hint">계정이 없으신가요? <a href="signup.html">회원가입</a></p>
+  </main>
+
+  <script src="nav.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>

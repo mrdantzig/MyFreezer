@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>레시피 추천 - Step 2</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <div id="nav"></div>
+    <h1>보유 재료로 레시피 추천받기</h1>
+    <p class="subtitle">1단계에서 확정한 재료로 AI가 레시피를 추천해요. (Step 2)</p>
+
+    <section id="no-ingredients-section" hidden>
+      <p class="error">확정된 재료가 없습니다. 1단계에서 재료를 먼저 확정해주세요.</p>
+    </section>
+
+    <section id="main-section" hidden>
+      <h2>보유 재료</h2>
+      <ul id="ingredient-chip-list" class="ingredient-list"></ul>
+
+      <form id="add-ingredient-form" class="add-form">
+        <input type="text" id="add-ingredient-input" placeholder="재료 직접 추가" />
+        <button type="submit">추가</button>
+      </form>
+
+      <form id="filter-form" class="filters">
+        <label>
+          식단 조건
+          <input type="text" id="diet-input" placeholder="예: 채식, 저염식 (선택)" />
+        </label>
+        <label class="checkbox-row">
+          <input type="checkbox" id="spicy-input" />
+          매운맛 선호
+        </label>
+        <label>
+          최대 조리 시간(분)
+          <input type="number" id="max-time-input" min="1" placeholder="예: 30 (선택)" />
+        </label>
+      </form>
+
+      <div class="actions">
+        <button id="generate-btn">레시피 추천받기</button>
+        <span id="status" class="status" role="status"></span>
+      </div>
+
+      <section id="error-section" hidden>
+        <p id="error-message" class="error"></p>
+        <button id="retry-btn">다시 시도</button>
+      </section>
+
+      <div id="recipe-list" class="recipe-list"></div>
+    </section>
+  </main>
+
+  <script src="nav.js"></script>
+  <script src="step2.js"></script>
+</body>
+</html>

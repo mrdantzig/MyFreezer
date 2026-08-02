@@ -1,0 +1,24 @@
+image:
+google/gemma-4-26b-a4b-it:free
+
+google/gemma-4-31b-it:free
+bytedance-seed/seedream-4.5
+x-ai/grok-imagine-image-quality
+
+text:
+cohere/north-mini-code:free
+
+openai/gpt-oss-20b:free
+bytedance-seed/seedream-4.5
+
+이제 준비된 API가 실제로 작동하는지 테스트해 줘.
+이미지 인식은 google/gemma-4-26b-a4b-it:free 모델을 이용하고,
+텍스트 인식은 cohere/north-mini-code:free 모델을 이용할 거야.
+API를 통한 텍스트와 이미지 인식을 각각 테스트해서 실행 결과를 알려줘.
+
+앞서 만든 OpenRouter API를 이용해서, 냉장고 사진에서 재료를 인식하고 레시피를 추천하는 웹 애플리케이션
+을 만들고 싶어. 다음과 같이 3단계로 나누어서 PRD를 만들어 줘.
+1단계는 이미지를 입력받고 google/gemma-4-26b-a4b-it:free 모델을 사용해서 이미지를 인식해.
+2단계는 1단계에서 얻은 정보와 cohere/north-mini-code:free 모델을 사용해서 레시피를 생성해.
+3단계는 사용자 프로필을 만들어서 레시피를 저장해.
+각 단계를 PRD_step1.md, PRD_step2.md, PRD_step3.md로 나누어 저장해 줘
